@@ -442,14 +442,22 @@ a:hover {
     transform 0.2s;
 }
 
+.side-nav a {
+  color: inherit;
+}
+
 .side-nav .nav-bar-item svg {
   width: 30px;
   height: 30px;
   stroke: currentColor;
 }
 
-.side-nav .nav-bar-item:hover {
+.side-nav .nav-bar-item:hover,
+.side-nav a.active .nav-bar-item {
   color: var(--primary-color);
+}
+
+.side-nav a.active .nav-bar-item {
   transform: scale(1.1);
 }
 

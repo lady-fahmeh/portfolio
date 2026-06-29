@@ -107,6 +107,30 @@ document.addEventListener("DOMContentLoaded", () => {
      <a href="mailto:${profileData.linkedIn}" class="btn js-scroll">LinkedIn</a>`;
 
   document.getElementById("footer").innerHTML = `<p>${profileData.footer}</p>`;
+
+  const navLinks = document.querySelectorAll(".side-nav a");
+  const scrollSections = document.querySelectorAll("#header, section");
+
+  const navObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        const id = entry.target.id;
+        const link = document.querySelector(`.side-nav a[href="#${id}"]`);
+        if (!link) return;
+
+        if (entry.isIntersecting) {
+          navLinks.forEach((navItem) => navItem.classList.remove("active"));
+          link.classList.add("active");
+        }
+      });
+    },
+    {
+      threshold: 0.5,
+    },
+  );
+
+  scrollSections.forEach((section) => navObserver.observe(section));
+
   window.addSkillItem = (item) => {
     const skillsList = document.querySelector(".skills-list");
     if (!skillsList) return;
